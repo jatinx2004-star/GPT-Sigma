@@ -19,11 +19,11 @@ app.use(cors());
 app.use("/api", chatRoutes);
 
 // Serve static frontend files
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
 // SPA fallback using pure middleware (bypasses path-to-regexp entirely)
 app.use((req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
+    res.sendFile(path.join(__dirname, "../Frontend/dist", "index.html"));
 });
 
 app.listen(PORT, () => {
