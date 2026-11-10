@@ -2,7 +2,7 @@ import "dotenv/config";
 
 const getGeminiResponse = async (userMessage) => {
   const apiKey = process.env.GEMINI_API_KEY;
-  const modelName = "gemini-1.5-flash"; // 👉 gemini-1.5-flash standard and stable model name use kar
+  const modelName = "gemini-3.5-flash-lite"; // 
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
 
