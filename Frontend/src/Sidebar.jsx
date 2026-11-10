@@ -6,16 +6,17 @@ import {v1 as uuidv1} from "uuid";
 function Sidebar(){
     const { allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats } = useContext(Mycontext);
 
-    const getAllThreads = async () => {     
+    const getAllThreads = async () => {    
       try {
-         const response = await fetch("http://localhost:8080/api/thread");
+         // 👉 Deployed backend URL
+         const response = await fetch("https://gpt-sigma.onrender.com/api/thread");
          const res = await response.json();
          const filteredData = res.map(thread => ({threadId: thread.threadId, title: thread.title}));
-         // console.log(filteredData);
          setAllThreads(filteredData);
       } catch(err){
          console.log(err);
-      }};
+      }
+    };
 
     useEffect(() => {
         getAllThreads();
@@ -33,24 +34,26 @@ function Sidebar(){
        setCurrThreadId(newThreadId);
 
        try{
-          const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
+          // 👉 Deployed backend URL
+          const response = await fetch(`https://gpt-sigma.onrender.com/api/thread/${newThreadId}`);
           const res = await response.json();
           console.log(res);
           setPrevChats(res);
           setNewChat(false);
           setReply(null);
-         }catch(err){
-           console.log(err);
-         }
-     }
+       }catch(err){
+          console.log(err);
+       }
+    }
 
-     const deleteThread = async (threadId) => {
+    const deleteThread = async (threadId) => {
          try{
-           const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, {method: "DELETE"});
+           // 👉 Deployed backend URL
+           const response = await fetch(`https://gpt-sigma.onrender.com/api/thread/${threadId}`, {method: "DELETE"});
            const res = await response.json();
            console.log(res);
 
-           //update threads list after deletion
+           // update threads list after deletion
            setAllThreads(prevThreads => prevThreads.filter(thread => thread.threadId !== threadId));
 
            if(threadId === currThreadId){
@@ -60,7 +63,7 @@ function Sidebar(){
          } catch(err){
             console.log(err);
          }
-     }
+    }
 
     return (
         <section className="sidebar">
@@ -86,7 +89,6 @@ function Sidebar(){
               }
            </ul>
 
-         
           <div className="sign">
                <p>By ApnaCollege &hearts;</p>
           </div>
