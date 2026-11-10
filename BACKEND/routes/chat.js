@@ -62,7 +62,7 @@ router.delete("/thread/:threadId", async(req, res) => {
 
     } catch(err){
         console.log(err);
-        res.status(500).json({error: "failed to fetch chat"});
+        res.status(500).json({error: "failed to fetch chat", details: err.message});
     }
 });
 

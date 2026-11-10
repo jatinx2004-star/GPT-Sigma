@@ -2,7 +2,7 @@ import "dotenv/config";
 
 const getGeminiResponse = async (userMessage) => {
   const apiKey = process.env.GEMINI_API_KEY;
-  const modelName = "gemini-3.5-flash-lite";
+  const modelName = "gemini-1.5-flash"; // 👉 gemini-1.5-flash standard and stable model name use kar
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
 
@@ -27,7 +27,6 @@ const getGeminiResponse = async (userMessage) => {
 
     if (!response.ok) {
       console.error("Gemini API Error Details:", data);
-      // 👉 Yahan res.Error ki jagah error throw karna hai
       throw new Error(data.error?.message || "Gemini API request failed");
     }
 
